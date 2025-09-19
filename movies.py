@@ -1,20 +1,13 @@
-# 📌 TMDB Movies Dataset Visualization
-
-# Step 1: Import libraries
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import ast
 from collections import Counter
-
-# Step 2: Load Dataset
 df = pd.read_csv("tmdb_5000_movies.csv")
 
 print("Dataset Shape:", df.shape)
 print(df.head())
-
-# Step 3: Data Preprocessing
 
 # Parse JSON columns (genres, production_companies, production_countries, spoken_languages)
 def parse_json_column(column):
@@ -26,16 +19,12 @@ def parse_json_column(column):
             return []
     return column.apply(parse)
 
-df['genres_parsed'] = parse_json_column(df['genres'])
-
-# Step 4: Basic statistics and info
+df['genres_parsed'] = parse_json_column(df['genr
 print("\nDataset Info:")
 print(df.info())
 
 print("\nMissing values per column:")
 print(df.isnull().sum())
-
-# Step 5: Visualizations
 
 plt.figure(figsize=(10,6))
 sns.histplot(df['budget'], bins=50, kde=False)
@@ -91,3 +80,4 @@ plt.figure(figsize=(8,6))
 sns.heatmap(df[numeric_cols].corr(), annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Correlation Heatmap of Numeric Features')
 plt.show()
+
